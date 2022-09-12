@@ -46,24 +46,44 @@
 
 // console.log(averageAge);
 
-const firstName = "Dmitry";
-const job = "Support IT Engineer";
-const birthYear = 1991;
-const year = 2022;
+// const firstName = "Dmitry";
+// const job = "Support IT Engineer";
+// const birthYear = 1991;
+// const year = 2022;
 
-const dmitry =
-  "I'm " + firstName + ", a " + (year - birthYear) + " year old " + job + "!";
+// const dmitry =
+//   "I'm " + firstName + ", a " + (year - birthYear) + " year old " + job + "!";
 
-console.log(dmitry);
+// console.log(dmitry);
 
-const dmitryNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+// const dmitryNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
 
-console.log(dmitryNew);
+// console.log(dmitryNew);
 
-console.log("String with \n\
-multiple \n\
-lines");
+// console.log("String with \n\
+// multiple \n\
+// lines");
 
-console.log(`String with
-multiple
-lines`);
+// console.log(`String with
+// multiple
+// lines`);
+
+const age = 15;
+
+//if-else control structure
+if (age >= 18) {
+  console.log("Sarah can start driving license 🚗");
+} else {
+  const yearsToLicense = 18 - age;
+  console.log(`Sarah is too young⛔. Wait another ${yearsToLicense} years.`);
+}
+
+const birthYear = 2012;
+let century;
+if (birthYear <= 2000) {
+  century = 20;
+} else if (birthYear >= 2001) {
+  century = 21;
+}
+
+console.log(century);
