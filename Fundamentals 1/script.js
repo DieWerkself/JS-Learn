@@ -132,22 +132,112 @@
 //   console.log(`This height is ${typeof height}`);
 // }
 
-const age = "18";
-if (age === 18) console.log("You just became an adult(strict)");
+// const age = "18";
+// if (age === 18) console.log("You just became an adult(strict)");
 
-if (age == 18) console.log("You just became an adult(loose)");
+// if (age == 18) console.log("You just became an adult(loose)");
 
-const favourite = Number(prompt("What's your favourite number?"));
-console.log(favourite);
+// const favourite = Number(prompt("What's your favourite number?"));
+// console.log(favourite);
 
-if (favourite === 23) {
-  console.log("Cool! 23 is an amazing number!");
-} else if (favourite === 7) {
-  console.log("7 is also a cool number!");
-} else if (favourite === 9) {
-  console.log("9 is also a cool number!");
-} else {
-  console.log("Number is not 23 or 7 or 9");
-}
+// if (favourite === 23) {
+//   console.log("Cool! 23 is an amazing number!");
+// } else if (favourite === 7) {
+//   console.log("7 is also a cool number!");
+// } else if (favourite === 9) {
+//   console.log("9 is also a cool number!");
+// } else {
+//   console.log("Number is not 23 or 7 or 9");
+// }
 
-if (favourite !== 23) console.log("Why not 23?");
+// if (favourite !== 23) console.log("Why not 23?");
+
+// 24. Logical Operators
+// const hasDriversLicense = true; // A
+// const hasGoodVision = true; // B
+
+// console.log(hasDriversLicense && hasGoodVision); // AND
+// console.log(hasDriversLicense || hasGoodVision); // OR
+// console.log(!hasDriversLicense);
+
+// const shouldDrive = hasDriversLicense && hasGoodVision;
+
+// if (shouldDrive) {
+//   console.log(`Sarah is able to drive!`);
+// } else {
+//   console.log("Someone else should drive...");
+// }
+
+// const isTired = true; // C
+// console.log(hasDriversLicense || hasGoodVision || isTired);
+
+// if (hasDriversLicense && hasGoodVision && !isTired) {
+//   console.log(`Sarah is able to drive!`);wednesdaythu
+// } else {
+//   console.log("Someone else should drive...");
+// }
+
+// 26. Switch Statement
+
+// const day = "mondaya";
+
+// switch (day) {
+//   case "monday": // day === monday
+//     console.log("Plan course structure");
+//     console.log("Go to coding meetup");
+//     break;
+//   case "tuesday":
+//     console.log("Prepare theory videos");
+//     break;
+//   case "wednesday":
+//   case "thursday":
+//     console.log("Write code examples");
+//     break;
+//   case "friday":
+//     console.log("Record videos");
+//     break;
+//   case "saturday":
+//   case "sanday":
+//     console.log("Enjoy the weekend");
+//     break;
+//   default:
+//     console.log("Not a valid day!");
+// }
+
+// let taskForDay;
+
+// if (day === "monday") {
+//   taskForDay = `Plan course structure. Go to coding meetup.`;
+// } else if (day === "tuesday") {
+//   taskForDay = `Prepare theory videos`;
+// } else if (day === "wednesday" || day === "thursday") {
+//   taskForDay = `Write code examples`;
+// } else if (day === "friday") {
+//   taskForDay = `Record videos`;
+// } else if (day === "saturday" || day === "sanday") {
+//   taskForDay = `Enjoy the weekend`;
+// } else {
+//   taskForDay = `Not a valid day!`;
+// }
+
+// console.log(taskForDay);
+
+// const age = 25;
+// const areYouAdult = age >= 18;
+
+// areYouAdult
+//   ? console.log("I like to drink wine")
+//   : console.log("I like to drink water");
+
+// const drink = areYouAdult ? "wine" : "water";
+// console.log(drink);
+
+// let drink2;
+// if (areYouAdult) {
+//   drink2 = "I like to drink wine";
+// } else {
+//   drink2 = "I like to drink water";
+// }
+// console.log(drink2);
+
+// console.log(`I like to drink ${areYouAdult ? "wine" : "water"}`);
