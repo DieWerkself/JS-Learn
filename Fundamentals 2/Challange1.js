@@ -22,23 +22,24 @@ Hints:
 § To check if number A is at least double number B, check for A >= 2 * B.
 Apply this to the team's average scores 😉
 GOOD LUCK 😀
+
+
+const calcAverage = (r1, r2, r3) => (r1 + r2 + r3) / 3;
+
+let winnerIs;
+const checkWinner = function (avgDolhins, avgKoalas) {
+  if (avgDolhins >= avgKoalas * 2) {
+    return `Dolhins win (${avgDolhins} vs. ${avgKoalas})`;
+  } else if (avgKoalas >= avgDolhins * 2) {
+    return `Koalas win (${avgKoalas} vs. ${avgDolhins})`;
+  } else {
+    return `It's draw`;
+  }
+};
+
+const avgDolhins = calcAverage(85, 54, 41);
+const avgKoalas = calcAverage(230, 340, 270);
+console.log(avgDolhins);
+console.log(avgKoalas);
+console.log(checkWinner(avgDolhins, avgKoalas));
 */
-
-// const calcAverage = (r1, r2, r3) => (r1 + r2 + r3) / 3;
-
-// let winnerIs;
-// const checkWinner = function (avgDolhins, avgKoalas) {
-//   if (avgDolhins >= avgKoalas * 2) {
-//     return `Dolhins win (${avgDolhins} vs. ${avgKoalas})`;
-//   } else if (avgKoalas >= avgDolhins * 2) {
-//     return `Koalas win (${avgKoalas} vs. ${avgDolhins})`;
-//   } else {
-//     return `It's draw`;
-//   }
-// };
-
-// const avgDolhins = calcAverage(85, 54, 41);
-// const avgKoalas = calcAverage(230, 340, 270);
-// console.log(avgDolhins);
-// console.log(avgKoalas);
-// console.log(checkWinner(avgDolhins, avgKoalas));
