@@ -170,3 +170,48 @@ if (friends.includes("Alex")) {
   console.log("You have a friend called Alex");
 }
 */
+
+const dmitryArray = [
+  "Dmitry",
+  "Semenov",
+  2022 - 1991,
+  "Support Engineer",
+  ["Max", "Alex", "Sam"],
+];
+
+const dmitry = {
+  firstName: "Dmitry",
+  lastName: "Semenov",
+  age: 2022 - 1991,
+  job: "Support Engineer",
+  friends: ["Max", "Alex", "Sam"],
+};
+
+console.log(dmitry);
+console.log(dmitry.lastName);
+console.log(dmitry["lastName"]);
+
+const nameKey = "Name";
+console.log(dmitry[`first${nameKey}`]);
+console.log(dmitry[`last${nameKey}`]);
+
+// console.log(dmitry.last${nameKey});
+const interestedIn = prompt(
+  "What do you whant to know about Dmitry? Choose between firstName, lastName, age, job, and friends"
+);
+
+if (dmitry[interestedIn]) {
+  console.log(dmitry[interestedIn]);
+} else {
+  console.log(
+    "Wrong request! Choose between firstName, lastName, age, job, and friends"
+  );
+}
+
+dmitry.location = "Russia";
+dmitry["twitter"] = "@dontremember";
+console.log(dmitry);
+
+console.log(
+  `${dmitry.firstName} has ${dmitry.friends.length} friends, and his best friend called ${dmitry.friends[0]}`
+);
