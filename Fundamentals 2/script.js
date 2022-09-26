@@ -169,7 +169,7 @@ console.log(friends.includes(23));
 if (friends.includes("Alex")) {
   console.log("You have a friend called Alex");
 }
-*/
+
 
 const dmitryArray = [
   "Dmitry",
@@ -215,3 +215,39 @@ console.log(dmitry);
 console.log(
   `${dmitry.firstName} has ${dmitry.friends.length} friends, and his best friend called ${dmitry.friends[0]}`
 );
+
+
+const dmitry = {
+  firstName: "Dmitry",
+  lastName: "Semenov",
+  birthYear: 1991,
+  job: "Support Engineer",
+  friends: ["Max", "Alex", "Sam"],
+  hasDriverLicense: true,
+
+  // calcAge: function (birthYear) {
+  //   return 2022 - birthYear;
+  // },
+
+  // calcAge: function () {
+  //   return 2022 - this.birthYear;
+  // },
+
+  calcAge: function () {
+    this.age = 2022 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${
+      this.job
+    }, and he has ${this.hasDriverLicense ? "a" : "no"} driver's license`;
+  },
+};
+
+console.log(dmitry.calcAge());
+console.log(dmitry.getSummary());
+
+console.log(dmitry.age);
+// console.log(dmitry["calcAge"]());
+*/
