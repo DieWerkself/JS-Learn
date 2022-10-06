@@ -250,4 +250,99 @@ console.log(dmitry.getSummary());
 
 console.log(dmitry.age);
 // console.log(dmitry["calcAge"]());
+
+
+// for loop keeps running while condition is TRUE
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep}`);
+}
+
+
+const dmitry = [
+  "Dmitry",
+  "Semenov",
+  2022 - 1991,
+  "Support Engineer",
+  ["Victor", "Alex", "Mike"],
+  true,
+];
+
+const types = [];
+
+// for (let i = 0; i < dmitry.length; i++) {
+//   // Reading from array
+//   console.log(dmitry[i], typeof dmitry[i]);
+//   // Filling types array
+//   // types[i] = typeof dmitry[i];
+//   types.push(typeof dmitry[i]);
+// }
+
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+  ages.push(2022 - years[i]);
+}
+console.log(ages);
+
+// continue and break
+for (let i = 0; i < dmitry.length; i++) {
+  if (typeof dmitry[i] !== "string") continue;
+
+  console.log(dmitry[i], typeof dmitry[i]);
+}
+
+for (let i = 0; i < dmitry.length; i++) {
+  if (typeof dmitry[i] === "number") break;
+
+  console.log(dmitry[i], typeof dmitry[i]);
+}
+
+
+const dmitry = [
+  "Dmitry",
+  "Semenov",
+  2022 - 1991,
+  "Support Engineer",
+  ["Victor", "Alex", "Mike"],
+  true,
+];
+
+for (let i = dmitry.length - 1; 0 <= i; i--) {
+  // if (typeof dmitry[i] !== "string") continue;
+
+  console.log(dmitry[i], typeof dmitry[i]);
+}
+
+for (let i = 1; i <= 3; i++) {
+  console.log(`------ Starting exercise ${i}`);
+
+  for (let j = 1; j <= 5; j++) {
+    console.log(`Exercise ${i}: Lifting weight ${j}`);
+  }
+}
+
+
+// for (let rep = 1; rep <= 10; rep++) {
+//   console.log(`Lifting weights repetition ${rep}`);
+// }
+
+let rep = 1;
+while (rep <= 10) {
+  // console.log(`Lifting weights repetition ${rep}`);
+  rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+console.log(dice);
+
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  if (dice === 6) {
+    console.log(`You win! Dice a ${dice}`);
+  }
+}
 */

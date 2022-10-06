@@ -13,7 +13,7 @@ respective BMI. Example: "John's BMI (28.3) is higher than Mark's (23.9)!"
 Test data: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m
 tall.
 GOOD LUCK 😀
-*/
+
 
 const mark = {
   firstName: "Mark",
@@ -48,3 +48,4 @@ if (john.caclBMI() > mark.caclBMI()) {
     `${mark.firstName}'s BMI (${mark.BMI}) is higher than ${john.firstName}'s (${john.BMI})!`
   );
 }
+*/
