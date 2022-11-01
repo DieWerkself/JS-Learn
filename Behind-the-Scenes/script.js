@@ -172,7 +172,7 @@ const friend = me;
 friend.age = 27;
 console.log(me);
 console.log(friend);
-*/
+
 
 // Primitive types
 let lastName = 'Williams';
@@ -206,3 +206,4 @@ jessica2Copy.family.push('John');
 
 console.log(`Before marriage`, jessica2);
 console.log(`After marriage`, jessica2Copy);
+*/
