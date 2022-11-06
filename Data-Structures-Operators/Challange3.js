@@ -16,7 +16,7 @@ whether it's in the first half or second half (after 45 min) of the game, like t
 ⚽
 GOAL
 GOOD LUCK 😀
-*/
+
 
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
@@ -49,3 +49,4 @@ average, every ${timeCurrentMatch / gameEvents.size} minutes`);
 for (const [key, value] of gameEvents) {
   console.log(`[${key <= 45 ? 'FIRST' : 'SECOND'} HALF] ${key}: ${value}`);
 }
+*/

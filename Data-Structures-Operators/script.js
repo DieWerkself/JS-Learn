@@ -62,10 +62,51 @@ Pizza is prepared with ${mainIngridient}${other}`);
   },
 };
 
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log(plane[3]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1, airline.length));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  console.log(seat.slice(-1));
+  seat.slice(-1) === 'B' || seat.slice(-1) === 'E'
+    ? console.log(`You got a middle seat: ${seat} `)
+    : console.log(`You got lucky: ${seat} `);
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+console.log(new String('dmitry'));
+console.log(typeof new String('dmitry'));
+
+console.log(typeof new String('dmitry').slice(1));
 /*
 //// Maps Iteration
 const question = new Map([
-  ['question', 'What is the best progremming language in the world?'],
+  ['question', 'What is the best programming language in the world?'],
   [1, 'C'],
   [2, 'Java'],
   [3, 'Python'],
