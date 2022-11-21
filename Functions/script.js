@@ -109,7 +109,7 @@ greet('Hello')('Jonas');
 const greet2 = greeting => name => console.log(`${greeting} ${name}`);
 
 greet2('Yooou')('Jonas');
-*/
+
 
 const lufthansa = {
   name: 'Lufthansa',
@@ -200,3 +200,4 @@ const addTaxRate = rate => value => value + value * rate;
 const addVAT2 = addTaxRate(0.23);
 
 console.log(addVAT2(256));
+*/
