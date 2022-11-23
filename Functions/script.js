@@ -201,3 +201,23 @@ const addVAT2 = addTaxRate(0.23);
 
 console.log(addVAT2(256));
 */
+
+const renOnce = function () {
+  console.log('This will never run again');
+};
+renOnce();
+
+// IIFE
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+(() => console.log('This will ALSO never run again'))();
+
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+// console.log(isPrivate);
+console.log(notPrivate);
