@@ -200,7 +200,7 @@ const addTaxRate = rate => value => value + value * rate;
 const addVAT2 = addTaxRate(0.23);
 
 console.log(addVAT2(256));
-*/
+
 
 const renOnce = function () {
   console.log('This will never run again');
@@ -221,3 +221,21 @@ renOnce();
 }
 // console.log(isPrivate);
 console.log(notPrivate);
+*/
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passenger`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
