@@ -82,6 +82,31 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcDisplayBalance = movements => {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${balance}€`;
+};
+
+calcDisplayBalance(account1.movements);
+
+const calcInOrOut = movements => {
+  movements.forEach(mov => {
+    if (mov > 0) {
+      const valueIn = movements
+        .filter(mov => mov > 0)
+        .reduce((acc, cur) => acc + cur, 0);
+      labelSumIn.textContent = `${valueIn}€`;
+    } else {
+      const valueOut = movements
+        .filter(mov => mov < 0)
+        .reduce((acc, cur) => acc + cur, 0);
+      labelSumOut.textContent = `${Math.abs(valueOut)}€`;
+    }
+  });
+};
+
+calcInOrOut(account1.movements);
+
 const createUsernames = accs => {
   accs.forEach(acc => {
     acc.username = acc.owner
@@ -91,8 +116,18 @@ const createUsernames = accs => {
       .join('');
   });
 };
-
 createUsernames(accounts);
+
+// const calcPrintBalance = accs => {
+//   labelBalance.innerHTML = '';
+//   accs.forEach(acc => {
+//     const balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
+//     console.log(balance);
+//     containerMovements.insertAdjacentHTML('afterbegin', balance);
+//   });
+// };
+
+// calcPrintBalance(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -219,7 +254,6 @@ const movementDescriptions = movements.map(
 );
 
 console.log(movementDescriptions);
-*/
 
 const deposits = movements.filter(mov => mov > 0);
 console.log(movements);
@@ -232,3 +266,22 @@ console.log(depositsFor);
 
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
+
+
+console.log(movements);
+
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+console.log(balance);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+*/
+
+// Maximum value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
