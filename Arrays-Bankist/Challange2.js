@@ -16,7 +16,7 @@ Test data:
 § Data 1: [5, 2, 4, 1, 15, 8, 3]
 § Data 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
-*/
+
 
 const Data1 = [5, 2, 4, 1, 15, 8, 3];
 const Data2 = [16, 6, 10, 5, 6, 1, 4];
@@ -31,3 +31,4 @@ const calcAverageHumanAge = ages => {
 
 console.log(calcAverageHumanAge(Data1));
 console.log(calcAverageHumanAge(Data2));
+*/

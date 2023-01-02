@@ -89,23 +89,42 @@ const calcDisplayBalance = movements => {
 
 calcDisplayBalance(account1.movements);
 
-const calcInOrOut = movements => {
-  movements.forEach(mov => {
-    if (mov > 0) {
-      const valueIn = movements
-        .filter(mov => mov > 0)
-        .reduce((acc, cur) => acc + cur, 0);
-      labelSumIn.textContent = `${valueIn}€`;
-    } else {
-      const valueOut = movements
-        .filter(mov => mov < 0)
-        .reduce((acc, cur) => acc + cur, 0);
-      labelSumOut.textContent = `${Math.abs(valueOut)}€`;
-    }
-  });
+const calcDisplaySummary = movements => {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const outcomes = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+
+  const intrest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumInterest.textContent = `${intrest}€`;
+  // movements.forEach(mov => {
+  //   if (mov > 0) {
+  //     const valueIn = movements
+  //       .filter(mov => mov > 0)
+  //       .reduce((acc, cur) => acc + cur, 0);
+  //     labelSumIn.textContent = `${valueIn}€`;
+  //   } else {
+  //     const valueOut = movements
+  //       .filter(mov => mov < 0)
+  //       .reduce((acc, cur) => acc + cur, 0);
+  //     labelSumOut.textContent = `${Math.abs(valueOut)}€`;
+  //   }
+  // });
 };
 
-calcInOrOut(account1.movements);
+calcDisplaySummary(account1.movements);
 
 const createUsernames = accs => {
   accs.forEach(acc => {
@@ -285,4 +304,18 @@ const max = movements.reduce((acc, mov) => {
   else return mov;
 }, movements[0]);
 console.log(max);
+
+const eurToUsd = 1.1;
+
+// Pipeline
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  // .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsUSD);
 */
