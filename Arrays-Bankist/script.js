@@ -319,3 +319,17 @@ const totalDepositsUSD = movements
 
 console.log(totalDepositsUSD);
 */
+
+const firtsWithrawal = movements.find(mov => mov < 0);
+
+console.log(movements);
+console.log(firtsWithrawal);
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+let owner;
+for (const acc of accounts) if (acc.owner === 'Jessica Davis') owner = acc;
+console.log(owner);
