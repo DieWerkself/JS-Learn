@@ -5,35 +5,97 @@
 // BANKIST APP
 
 // Data
-const account1 = {
+// const account1 = {
+//   owner: 'Jonas Schmedtmann',
+//   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+//   interestRate: 1.2, // %
+//   pin: 1111,
+// };
+
+const account1ex = {
   owner: 'Jonas Schmedtmann',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [
+    { amount: 200, ta: 'No data' },
+    { amount: 450, ta: 'No data' },
+    { amount: -400, ta: 'No data' },
+    { amount: 3000, ta: 'No data' },
+    { amount: -650, ta: 'No data' },
+    { amount: -130, ta: 'No data' },
+    { amount: 70, ta: 'No data' },
+    { amount: 1300, ta: 'No data' },
+  ],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
-const account2 = {
+// const account2 = {
+//   owner: 'Jessica Davis',
+//   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+//   interestRate: 1.5,
+//   pin: 2222,
+// };
+
+const account2ex = {
   owner: 'Jessica Davis',
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  movements: [
+    { amount: 5000, ta: 'No data' },
+    { amount: 3400, ta: 'No data' },
+    { amount: -150, ta: 'No data' },
+    { amount: -790, ta: 'No data' },
+    { amount: -3210, ta: 'No data' },
+    { amount: -1000, ta: 'No data' },
+    { amount: 8500, ta: 'No data' },
+    { amount: -30, ta: 'No data' },
+  ],
   interestRate: 1.5,
   pin: 2222,
 };
 
-const account3 = {
+// const account3 = {
+//   owner: 'Steven Thomas Williams',
+//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
+//   interestRate: 0.7,
+//   pin: 3333,
+// };
+
+const account3ex = {
   owner: 'Steven Thomas Williams',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  movements: [
+    { amount: 200, ta: 'No data' },
+    { amount: -200, ta: 'No data' },
+    { amount: 340, ta: 'No data' },
+    { amount: -300, ta: 'No data' },
+    { amount: -20, ta: 'No data' },
+    { amount: 50, ta: 'No data' },
+    { amount: 400, ta: 'No data' },
+    { amount: -460, ta: 'No data' },
+  ],
   interestRate: 0.7,
   pin: 3333,
 };
 
-const account4 = {
+// const account4 = {
+//   owner: 'Sarah Smith',
+//   movements: [430, 1000, 700, 50, 90],
+//   interestRate: 1,
+//   pin: 4444,
+// };
+
+const account4ex = {
   owner: 'Sarah Smith',
-  movements: [430, 1000, 700, 50, 90],
+  movements: [
+    { amount: 430, ta: 'No data' },
+    { amount: 1000, ta: 'No data' },
+    { amount: 700, ta: 'No data' },
+    { amount: 50, ta: 'No data' },
+    { amount: 90, ta: 'No data' },
+  ],
   interestRate: 1,
   pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+// const accounts = [account1, account2, account3, account4];
+const accountsEx = [account1ex, account2ex, account3ex, account4ex];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -43,6 +105,7 @@ const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
 const labelTimer = document.querySelector('.timer');
+const labelTransfer = document.querySelector('.label--transfer');
 
 const containerApp = document.querySelector('.app');
 const containerMovements = document.querySelector('.movements');
@@ -65,14 +128,15 @@ const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
 
   movements.forEach(function (mov, i) {
-    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const type = mov.amount > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}€</div>
+    <p>${mov.ta}</p>
+      <div class="movements__value">${mov.amount}€</div>
     </div>
     `;
 
@@ -81,29 +145,29 @@ const displayMovements = function (movements) {
 };
 
 const calcDisplayBalance = movements => {
-  const balance = movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${balance}€`;
+  currentAccount.balance = movements.reduce((acc, cur) => acc + cur.amount, 0);
+  labelBalance.textContent = `${currentAccount.balance}€`;
 };
 
 const calcDisplaySummary = account => {
   const incomes = account.movements
-    .filter(mov => mov > 0)
-    .reduce((acc, cur) => acc + cur, 0);
+    .filter(mov => mov.amount > 0)
+    .reduce((acc, cur) => acc + cur.amount, 0);
   labelSumIn.textContent = `${incomes}€`;
 
   const outcomes = account.movements
-    .filter(mov => mov < 0)
-    .reduce((acc, cur) => acc + cur, 0);
+    .filter(mov => mov.amount < 0)
+    .reduce((acc, cur) => acc + cur.amount, 0);
   labelSumOut.textContent = `${Math.abs(outcomes)}€`;
 
-  const intrest = account.movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * account.interestRate) / 100)
+  const interest = account.movements
+    .filter(mov => mov.amount > 0)
+    .map(deposit => (deposit.amount * account.interestRate) / 100)
     .filter((int, i, arr) => {
       return int >= 1;
     })
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumInterest.textContent = `${intrest}€`;
+  labelSumInterest.textContent = `${interest}€`;
 
   // movements.forEach(mov => {
   //   if (mov > 0) {
@@ -129,16 +193,22 @@ const createUsernames = accs => {
       .join('');
   });
 };
-createUsernames(accounts);
+createUsernames(accountsEx);
 
 // Event Handlers
+
+const updateUI = acc => {
+  displayMovements(acc.movements);
+  calcDisplayBalance(acc.movements);
+  calcDisplaySummary(acc);
+};
 
 let currentAccount;
 console.log(currentAccount);
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-  currentAccount = accounts.find(
+  currentAccount = accountsEx.find(
     acc => acc.username === inputLoginUsername.value
   );
 
@@ -164,9 +234,51 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
     // Display movements, balance and summary
-    displayMovements(currentAccount.movements);
-    calcDisplayBalance(currentAccount.movements);
-    calcDisplaySummary(currentAccount);
+    updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accountsEx.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  console.log(amount, receiverAcc);
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    amount <= currentAccount.balance &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push({
+      amount: -amount,
+      ta: `to ${receiverAcc.owner}`,
+    });
+    receiverAcc.movements.push({
+      amount: amount,
+      ta: `from ${currentAccount.owner}`,
+    });
+    updateUI(currentAccount);
+
+    inputTransferAmount.value = inputTransferTo.value = '';
+    inputTransferAmount.blur();
+    inputTransferTo.blur();
+    labelTransfer.style.opacity = '1';
+    labelTransfer.style.color = 'green';
+    labelTransfer.textContent = 'Completed!';
+
+    setTimeout(function () {
+      labelTransfer.style.opacity = '0';
+      setTimeout(function () {
+        labelTransfer.textContent = '';
+      }, 1000);
+    }, 2000);
+  } else {
+    labelTransfer.style.color = 'red';
+    labelTransfer.style.opacity = '1';
+    labelTransfer.textContent = 'Error!';
   }
 });
 

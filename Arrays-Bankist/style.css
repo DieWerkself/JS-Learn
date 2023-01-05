@@ -295,3 +295,15 @@ h2 {
 .timer {
   font-weight: 600;
 }
+
+.transfer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  transition: all 1s;
+}
+
+.label--transfer {
+  opacity: 0;
+  transition: all 1s;
+}
