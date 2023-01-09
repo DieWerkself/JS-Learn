@@ -15,14 +15,14 @@
 const account1ex = {
   owner: 'Jonas Schmedtmann',
   movements: [
-    { amount: 200, ta: 'No data' },
-    { amount: 450, ta: 'No data' },
-    { amount: -400, ta: 'No data' },
-    { amount: 3000, ta: 'No data' },
-    { amount: -650, ta: 'No data' },
-    { amount: -130, ta: 'No data' },
-    { amount: 70, ta: 'No data' },
-    { amount: 1300, ta: 'No data' },
+    { amount: 200, ta: '' },
+    { amount: 450, ta: '' },
+    { amount: -400, ta: '' },
+    { amount: 3000, ta: '' },
+    { amount: -650, ta: '' },
+    { amount: -130, ta: '' },
+    { amount: 70, ta: '' },
+    { amount: 1300, ta: '' },
   ],
   interestRate: 1.2, // %
   pin: 1111,
@@ -38,14 +38,14 @@ const account1ex = {
 const account2ex = {
   owner: 'Jessica Davis',
   movements: [
-    { amount: 5000, ta: 'No data' },
-    { amount: 3400, ta: 'No data' },
-    { amount: -150, ta: 'No data' },
-    { amount: -790, ta: 'No data' },
-    { amount: -3210, ta: 'No data' },
-    { amount: -1000, ta: 'No data' },
-    { amount: 8500, ta: 'No data' },
-    { amount: -30, ta: 'No data' },
+    { amount: 5000, ta: '' },
+    { amount: 3400, ta: '' },
+    { amount: -150, ta: '' },
+    { amount: -790, ta: '' },
+    { amount: -3210, ta: '' },
+    { amount: -1000, ta: '' },
+    { amount: 8500, ta: '' },
+    { amount: -30, ta: '' },
   ],
   interestRate: 1.5,
   pin: 2222,
@@ -61,14 +61,14 @@ const account2ex = {
 const account3ex = {
   owner: 'Steven Thomas Williams',
   movements: [
-    { amount: 200, ta: 'No data' },
-    { amount: -200, ta: 'No data' },
-    { amount: 340, ta: 'No data' },
-    { amount: -300, ta: 'No data' },
-    { amount: -20, ta: 'No data' },
-    { amount: 50, ta: 'No data' },
-    { amount: 400, ta: 'No data' },
-    { amount: -460, ta: 'No data' },
+    { amount: 200, ta: '' },
+    { amount: -200, ta: '' },
+    { amount: 340, ta: '' },
+    { amount: -300, ta: '' },
+    { amount: -20, ta: '' },
+    { amount: 50, ta: '' },
+    { amount: 400, ta: '' },
+    { amount: -460, ta: '' },
   ],
   interestRate: 0.7,
   pin: 3333,
@@ -84,11 +84,11 @@ const account3ex = {
 const account4ex = {
   owner: 'Sarah Smith',
   movements: [
-    { amount: 430, ta: 'No data' },
-    { amount: 1000, ta: 'No data' },
-    { amount: 700, ta: 'No data' },
-    { amount: 50, ta: 'No data' },
-    { amount: 90, ta: 'No data' },
+    { amount: 430, ta: '' },
+    { amount: 1000, ta: '' },
+    { amount: 700, ta: '' },
+    { amount: 50, ta: '' },
+    { amount: 90, ta: '' },
   ],
   interestRate: 1,
   pin: 4444,
@@ -135,7 +135,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-    <p>${mov.ta}</p>
+    <p>${mov.ta ? mov.ta : 'No data'}</p>
       <div class="movements__value">${mov.amount}€</div>
     </div>
     `;
@@ -278,6 +278,25 @@ btnTransfer.addEventListener('click', function (e) {
     labelTransfer.style.color = 'red';
     labelTransfer.style.opacity = '1';
     labelTransfer.textContent = 'Error!';
+  }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const loanAmount = Number(inputLoanAmount.value);
+
+  if (
+    loanAmount > 0 &&
+    currentAccount.movements.some(mov => mov.amount >= loanAmount * 0.1)
+  ) {
+    currentAccount.movements.push({
+      amount: loanAmount,
+      ta: `Loan from BANK`,
+    });
+    updateUI(currentAccount);
+    inputLoanAmount.value = '';
+    inputLoanAmount.blur();
   }
 });
 
@@ -499,3 +518,24 @@ let owner;
 for (const acc of accounts) if (acc.owner === 'Jessica Davis') owner = acc;
 console.log(owner);
 */
+
+console.log(movements);
+
+// Equality
+console.log(movements.includes(-130));
+
+// Condition: Some
+console.log(movements.some(mov => mov === -130));
+
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);
+
+// Condition: Every
+console.log(movements.every(mov => mov > 0));
+console.log(account4ex.movements.every(mov => mov.amount > 0));
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
