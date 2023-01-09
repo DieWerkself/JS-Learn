@@ -204,7 +204,6 @@ const updateUI = acc => {
 };
 
 let currentAccount;
-console.log(currentAccount);
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -279,6 +278,27 @@ btnTransfer.addEventListener('click', function (e) {
     labelTransfer.style.color = 'red';
     labelTransfer.style.opacity = '1';
     labelTransfer.textContent = 'Error!';
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accountsEx.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    console.log(index);
+
+    // Delete account
+    accountsEx.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
   }
 });
 
