@@ -517,7 +517,7 @@ console.log(account);
 let owner;
 for (const acc of accounts) if (acc.owner === 'Jessica Davis') owner = acc;
 console.log(owner);
-*/
+
 
 console.log(movements);
 
@@ -538,4 +538,34 @@ console.log(account4ex.movements.every(mov => mov.amount > 0));
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+*/
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// const accountMovements = accountsEx.map(acc => acc.movements);
+// console.log(accountMovements);
+
+// const allMovements = accountMovements.flat().map(acc => acc.amount);
+// console.log(allMovements);
+
+// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+// flat
+const overalBalanceChain = accountsEx
+  .map(acc => acc.movements)
+  .flat()
+  .map(acc => acc.amount)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalanceChain);
+
+//flatMap
+const overalBalanceChain2 = accountsEx
+  .flatMap(acc => acc.movements)
+  .map(acc => acc.amount)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalanceChain2);
