@@ -124,10 +124,14 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  const movs = sort
+    ? movements.slice().sort((a, b) => a.amount - b.amount)
+    : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov.amount > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -321,6 +325,13 @@ btnClose.addEventListener('click', function (e) {
   }
 });
 
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
 // const calcPrintBalance = accs => {
 //   labelBalance.innerHTML = '';
 //   accs.forEach(acc => {
@@ -538,7 +549,7 @@ console.log(account4ex.movements.every(mov => mov.amount > 0));
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
-*/
+
 
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 console.log(arr.flat());
@@ -569,3 +580,37 @@ const overalBalanceChain2 = accountsEx
   .map(acc => acc.amount)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalanceChain2);
+*/
+
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+// Numbers
+console.log(movements);
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+console.log(
+  movements.sort((a, b) => {
+    console.log('Check');
+    if (a > b) return 1;
+    if (b > a) return -1;
+  })
+);
+
+console.log(movements.sort((a, b) => a - b));
+
+// Descending
+console.log(
+  movements.sort((a, b) => {
+    console.log('Check');
+    if (a > b) return -1;
+    if (b > a) return 1;
+  })
+);
+
+console.log(movements.sort((a, b) => b - a));
