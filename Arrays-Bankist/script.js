@@ -580,7 +580,7 @@ const overalBalanceChain2 = accountsEx
   .map(acc => acc.amount)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalanceChain2);
-*/
+
 
 // Strings
 const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
@@ -614,3 +614,47 @@ console.log(
 );
 
 console.log(movements.sort((a, b) => b - a));
+*/
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// Empty arrays +
+const x = new Array(7);
+console.log(x);
+// console.log(x.map(() => 5));
+
+// x.fill(1);
+
+x.fill(1, 3, 5);
+console.log(x);
+
+arr.fill(23, 2, 6);
+console.log(arr);
+
+// Array.from
+
+console.log(Array.from({ length: 7 }, () => 1));
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const y = Array.from(
+  { length: 100 },
+  () => Math.floor(Math.random() * 100) + 1
+);
+console.log(y);
+
+const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
+console.log(movementsUI);
+
+labelBalance.addEventListener('click', () => {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2);
+});
