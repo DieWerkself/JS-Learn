@@ -45,7 +45,7 @@ const dogs = [
 { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
 GOOD LUCK 😀
-*/
+
 
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
@@ -126,3 +126,4 @@ const shallowDogs = dogs
   .slice()
   .sort((a, b) => a.recommendedFood - b.recommendedFood);
 console.log(shallowDogs);
+*/
