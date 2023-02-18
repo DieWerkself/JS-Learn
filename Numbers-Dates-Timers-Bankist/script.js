@@ -167,7 +167,7 @@ const displayMovements = function (movements, sort = false) {
       i + 1
     } ${type}</div>
     <p>${mov.ta ? mov.ta : 'No data'}</p>
-      <div class="movements__value">${mov.amount}€</div>
+      <div class="movements__value">${mov.amount.toFixed(2)}€</div>
     </div>
     `;
 
@@ -177,19 +177,19 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = movements => {
   currentAccount.balance = movements.reduce((acc, cur) => acc + cur.amount, 0);
-  labelBalance.textContent = `${currentAccount.balance}€`;
+  labelBalance.textContent = `${currentAccount.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = account => {
   const incomes = account.movements
     .filter(mov => mov.amount > 0)
     .reduce((acc, cur) => acc + cur.amount, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const outcomes = account.movements
     .filter(mov => mov.amount < 0)
     .reduce((acc, cur) => acc + cur.amount, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`;
 
   const interest = account.movements
     .filter(mov => mov.amount > 0)
@@ -198,7 +198,7 @@ const calcDisplaySummary = account => {
       return int >= 1;
     })
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 
   // movements.forEach(mov => {
   //   if (mov > 0) {
@@ -315,7 +315,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const loanAmount = +inputLoanAmount.value;
+  const loanAmount = Math.floor(inputLoanAmount.value);
 
   if (
     loanAmount > 0 &&
@@ -359,7 +359,7 @@ btnSort.addEventListener('click', function (e) {
   displayMovements(currentAccount.movements, !sorted);
   sorted = !sorted;
 });
-
+/*
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -398,3 +398,44 @@ console.log(Number.isFinite(23 / 0));
 console.log(Number.isInteger(23));
 console.log(Number.isInteger(23.0));
 console.log(Number.isInteger(23 / 0));
+*/
+
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(8 ** (1 / 3));
+
+console.log(Math.max(5, 18, 23, 11, 2));
+console.log(Math.max(5, 18, '23', 11, 2));
+console.log(Math.max(5, 18, '23px', 11, 2));
+
+console.log(Math.min(5, 18, 23, 11, 2));
+
+console.log(Math.PI * Number.parseFloat('10px') ** 2);
+
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+console.log(randomInt(3, 10));
+
+// Rounding integers
+
+console.log(Math.round(23.3));
+console.log(Math.round(23.9));
+
+console.log(Math.ceil(23.3));
+console.log(Math.ceil(23.9));
+
+console.log(Math.floor(23.3));
+console.log(Math.floor('23.9'));
+
+console.log(Math.trunc(23.3));
+
+console.log(Math.trunc(-23.3));
+console.log(Math.floor(-23.3));
+
+// Roundings decimals
+console.log((2.7).toFixed(0));
+console.log((2.7).toFixed(3));
+console.log((2.345).toFixed(2));
+console.log(+(2.345).toFixed(2));
