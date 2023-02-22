@@ -152,6 +152,7 @@ nav {
   text-transform: uppercase;
   font-weight: 500;
   color: #666;
+  padding-right: 10px;
 }
 
 .movements__type--deposit {
