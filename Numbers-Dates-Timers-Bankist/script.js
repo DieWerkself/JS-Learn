@@ -190,6 +190,12 @@ const formatMovementDate = date => {
   }
 };
 
+const formattedMov = amount =>
+  new Intl.NumberFormat(currentAccount.locale, {
+    style: 'currency',
+    currency: currentAccount.currency,
+  }).format(amount);
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -210,7 +216,7 @@ const displayMovements = function (acc, sort = false) {
     } ${type}</div>
     <div class="movements__date">${displayDate}</div>
     <p>${mov.ta ? mov.ta : 'No data'}</p>
-    <div class="movements__value">${mov.amount.toFixed(2)}€</div>
+    <div class="movements__value">${formattedMov(mov.amount)}</div>
     </div>
     `;
 
@@ -220,19 +226,19 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = movements => {
   currentAccount.balance = movements.reduce((acc, cur) => acc + cur.amount, 0);
-  labelBalance.textContent = `${currentAccount.balance.toFixed(2)}€`;
+  labelBalance.textContent = formattedMov(currentAccount.balance);
 };
 
 const calcDisplaySummary = account => {
   const incomes = account.movements
     .filter(mov => mov.amount > 0)
     .reduce((acc, cur) => acc + cur.amount, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = formattedMov(incomes);
 
   const outcomes = account.movements
     .filter(mov => mov.amount < 0)
     .reduce((acc, cur) => acc + cur.amount, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`;
+  labelSumOut.textContent = formattedMov(Math.abs(outcomes));
 
   const interest = account.movements
     .filter(mov => mov.amount > 0)
@@ -241,7 +247,7 @@ const calcDisplaySummary = account => {
       return int >= 1;
     })
     .reduce((acc, cur) => acc + cur, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = formattedMov(interest);
 
   // movements.forEach(mov => {
   //   if (mov > 0) {
@@ -280,9 +286,9 @@ const updateUI = acc => {
 let currentAccount;
 
 // Fake always log in
-currentAccount = account1ex;
-updateUI(currentAccount);
-containerApp.style.opacity = 1;
+// currentAccount = account1ex;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 1;
 
 // Experimentig API
 
@@ -633,3 +639,20 @@ const calcDaysPassed = (date1, date2) =>
 const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
 console.log(days1);
 */
+
+const num = 646541312.54;
+
+const options = {
+  style: 'currency',
+  unit: 'celsius',
+  currency: 'EUR',
+  // useGrouping: false,
+};
+
+console.log('USA:', new Intl.NumberFormat('en-US', options).format(num));
+console.log('GER:', new Intl.NumberFormat('de-DE', options).format(num));
+console.log('SYR:', new Intl.NumberFormat('ar-SY', options).format(num));
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);
