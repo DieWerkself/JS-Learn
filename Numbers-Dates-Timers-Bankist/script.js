@@ -99,6 +99,19 @@ const account3ex = {
   ],
   interestRate: 0.7,
   pin: 3333,
+
+  movementsDates: [
+    '2019-11-01T13:15:33.035Z',
+    '2019-11-30T09:48:16.867Z',
+    '2019-12-25T06:04:23.907Z',
+    '2020-01-25T14:18:46.235Z',
+    '2020-02-05T16:33:06.386Z',
+    '2020-04-10T14:43:26.374Z',
+    '2020-06-25T18:49:59.371Z',
+    '2020-07-26T12:01:20.894Z',
+  ],
+  currency: 'RUB',
+  locale: 'ru-RU',
 };
 
 // const account4 = {
@@ -119,6 +132,16 @@ const account4ex = {
   ],
   interestRate: 1,
   pin: 4444,
+
+  movementsDates: [
+    '2019-11-01T13:15:33.035Z',
+    '2019-11-30T09:48:16.867Z',
+    '2019-12-25T06:04:23.907Z',
+    '2020-01-25T14:18:46.235Z',
+    '2020-02-05T16:33:06.386Z',
+  ],
+  currency: 'CNY',
+  locale: 'zh-CN',
 };
 
 // const accounts = [account1, account2, account3, account4];
@@ -163,10 +186,7 @@ const formatMovementDate = date => {
   if (daysPassed <= 7) return `${daysPassed} days ago`;
   if (daysPassed === 0) return 'Today';
   else {
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return new Intl.DateTimeFormat(currentAccount.locale).format(date);
   }
 };
 
@@ -264,7 +284,7 @@ currentAccount = account1ex;
 updateUI(currentAccount);
 containerApp.style.opacity = 1;
 
-// day/month/year
+// Experimentig API
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -292,12 +312,19 @@ btnLogin.addEventListener('click', function (e) {
 
     // Create current date and time
     const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      // weekday: 'short',
+    };
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -595,7 +622,7 @@ console.log(Date.now());
 
 future.setFullYear(2040);
 console.log(future);
-*/
+
 
 const future = new Date(2037, 10, 19, 15, 23);
 console.log(+future);
@@ -605,3 +632,4 @@ const calcDaysPassed = (date1, date2) =>
 
 const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
 console.log(days1);
+*/
