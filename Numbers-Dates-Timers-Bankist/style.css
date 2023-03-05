@@ -66,6 +66,28 @@ nav {
   color: #bbb;
 }
 
+.logout__btn {
+  display: none;
+  border: none;
+  padding: 0.5rem 2rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  text-align: center;
+  width: 12rem;
+  border-radius: 10rem;
+  margin-right: 1rem;
+  border: 1px solid #fff;
+  transition: all 0.3s;
+  background: linear-gradient(to top left, #e52a5a, #ff585f);
+  color: white;
+  justify-content: center;
+}
+
+.logout__btn:hover {
+  background: linear-gradient(to top left, #8e1634, #ff585f);
+  cursor: pointer;
+}
+
 .login__btn {
   border: none;
   background: none;

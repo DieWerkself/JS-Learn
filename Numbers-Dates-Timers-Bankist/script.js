@@ -42,6 +42,7 @@ const account1ex = {
   locale: 'pt-PT', // de-DE
 };
 
+// console.log(account1ex);
 // const account2 = {
 //   owner: 'Jessica Davis',
 //   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
@@ -160,8 +161,10 @@ const labelLoan = document.querySelector('.label--loan');
 
 const containerApp = document.querySelector('.app');
 const containerMovements = document.querySelector('.movements');
+const login = document.querySelector('.login');
 
 const btnLogin = document.querySelector('.login__btn');
+const btnLogout = document.querySelector('.logout__btn');
 const btnTransfer = document.querySelector('.form__btn--transfer');
 const btnLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
@@ -174,6 +177,14 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+
+let currentAccount, timer;
+
+const merge = account => {
+  account.movements.forEach((mov, i) => {
+    mov.date = account.movementsDates[i];
+  });
+};
 
 const formatMovementDate = date => {
   const calcDaysPassed = (date1, date2) =>
@@ -207,7 +218,7 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov.amount > 0 ? 'deposit' : 'withdrawal';
 
-    const date = new Date(acc.movementsDates[i]);
+    const date = new Date(!mov.date ? acc.movementsDates[i] : mov.date);
     const displayDate = formatMovementDate(date);
 
     const html = `
@@ -280,6 +291,7 @@ const updateUI = acc => {
   displayMovements(acc);
   calcDisplayBalance(acc.movements);
   calcDisplaySummary(acc);
+  merge(acc);
 };
 
 const startLogoutTimer = () => {
@@ -292,14 +304,12 @@ const startLogoutTimer = () => {
     // When 0 second, stop timer and log out user
     if (time === 0) {
       clearInterval(intTimer);
-      containerApp.style.opacity = 0;
-      labelWelcome.textContent = `Log in to get started`;
-      currentAccount = '';
+      logout();
     }
     time--;
   };
   // Set time to 5 minutes
-  let time = 120;
+  let time = 10;
   // Call the timer every second
   timer();
   const intTimer = setInterval(timer, 1000);
@@ -307,7 +317,6 @@ const startLogoutTimer = () => {
 };
 
 // Event Handlers
-let currentAccount, timer;
 
 // Fake always log in
 // currentAccount = account1ex;
@@ -338,6 +347,9 @@ btnLogin.addEventListener('click', function (e) {
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }!`;
+    login.style.display = 'none';
+    btnLogout.style.display = 'flex';
+
     containerApp.style.opacity = 1;
 
     // Create current date and time
@@ -367,6 +379,16 @@ btnLogin.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+
+const logout = () => {
+  labelWelcome.textContent = `Log in to get started`;
+  containerApp.style.opacity = 0;
+  currentAccount = '';
+  btnLogout.style.display = 'none';
+  login.style.display = 'flex';
+};
+
+btnLogout.addEventListener('click', logout);
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
@@ -473,10 +495,13 @@ btnClose.addEventListener('click', function (e) {
 
     // Delete account
     accountsEx.splice(index, 1);
+    inputCloseUsername.value = '';
+    inputClosePin.value = '';
+    inputCloseUsername.blur();
+    inputCloseUsername.blur();
 
     // Hide UI
-    containerApp.style.opacity = 0;
-    labelWelcome.textContent = `Log in to get started`;
+    logout();
   }
 });
 
@@ -486,6 +511,8 @@ btnSort.addEventListener('click', function (e) {
   e.preventDefault();
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
+  clearInterval(timer);
+  timer = startLogoutTimer();
 });
 /*
 /////////////////////////////////////////////////
