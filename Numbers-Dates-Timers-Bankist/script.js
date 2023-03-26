@@ -309,7 +309,7 @@ const startLogoutTimer = () => {
     time--;
   };
   // Set time to 5 minutes
-  let time = 10;
+  let time = 300;
   // Call the timer every second
   timer();
   const intTimer = setInterval(timer, 1000);

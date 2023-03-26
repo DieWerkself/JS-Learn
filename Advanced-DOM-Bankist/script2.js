@@ -1,19 +1,25 @@
+const input = document.querySelector('.input');
+const button = document.querySelector('.button');
+
+// I + IV
+
 function calculator(string) {
   const array = string.split(' ');
-  console.log(array.length);
-  const numbers = [array[0], array[2]];
-  const operator = array[1];
+  if (array.length > 3) throw error; // Первая ошибка, неправильно слово lenght, должно быть length
+  const numbers = [array[0], array[2]]; // I и IV
+  const operator = array[1]; // +
 
   if (!+array[0] && !+array[2]) {
-    const trNum = toAN();
+    const trNum = toAN(); // [1, 3, 5, 4] > 1, 3, 5, 4
     if (!trNum) return;
-    const result = calc(...trNum);
-    return toRN(result);
+    const result = calc(...trNum); // calc(1, 4)
+    const rNresult = toRN(result);
+    return rNresult;
   } else if (+array[0] && +array[2]) {
     const result = calc(...[+array[0], +array[2]]);
-    return result;
+    return console.log(result);
   } else {
-    return;
+    throw error;
   }
 
   function calc(a, b) {
@@ -34,7 +40,7 @@ function calculator(string) {
   }
 
   function toAN() {
-    let arr = [];
+    let arr = [1, 4];
     for (let rn of numbers) {
       switch (rn) {
         case 'I':
@@ -46,7 +52,7 @@ function calculator(string) {
         case 'III':
           arr.push(3);
           break;
-        case 'IV':
+        case 'IV': // Ошибка 2: Цифра 4 по арабски IV
           arr.push(4);
           break;
         case 'V':
@@ -68,7 +74,7 @@ function calculator(string) {
           arr.push(10);
           break;
         default:
-          return;
+          throw error;
       }
     }
     return arr;
@@ -92,27 +98,15 @@ function toRN(num) {
     I: 1,
   };
   let result = '';
+  if (num <= 0) return result;
 
   for (key in map) {
-    const repeatCounter = Math.floor(num / map[key]);
-
-    if (repeatCounter !== 0) {
-      result += key.repeat(repeatCounter);
+    for (key in map) {
+      result += key.repeat(Math.floor(num / map[key]));
+      num %= map[key];
     }
-
-    num %= map[key];
-
-    if (num === 0) return result;
   }
-
   return result;
 }
 
-console.log(calculator('1 + 1'));
-console.log(calculator('1 + 2'));
-console.log(calculator('4 + 3'));
-console.log(calculator('10 + 10'));
-console.log(calculator('  - I'));
-console.log(calculator('IV + III'));
-console.log(calculator('10 - I'));
-console.log(calculator(' - '));
+button.addEventListener('click', () => calculator(input.textContent));
